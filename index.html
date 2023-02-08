@@ -9,7 +9,7 @@
 
 const config = {
 	width: 960,
-	height: 540
+	height: 540,
 	scene:{
 		preload: precarga,
 		create: crear,
@@ -17,9 +17,25 @@ const config = {
 	}
 };
 
-const game = new Phaser.game(config);
+const game = new Phaser.Game(config);
 
 let player;
+let player_speed = 3;
+let enemy = [];
+let enemy_padding = 128;
+let enemy_pos = [
+	{x: enemy_padding, y:enemy_padding},
+	{x: config.wigth/2. y: enemy_padding),
+	{x: config.widht - enemy_padding, y: enemy_padding},
+
+	{x: config.widht - enemy_padding, y: enemy_padding/2},
+	
+	{x: config.widht - enemy_padding, y: config.height - enemy_padding},
+	{x: config.widht/2, y: config.height - enemy_padding},
+	{x: config.widht, y: config.height - enemy_padding},
+
+	{x: enemy_padding, y: config.height/2}
+	]
 
 let key_left;
 let key_right;
@@ -30,10 +46,13 @@ function precarga ()
 {
  this.load.image("player-img", "player.png");
 }
+
+
+
 function crear ()
 {
 
-player = this.add.image(64, 64, "player-img");
+	player = this.add.image(config.width/2, config.height/2, "player-img");
 
  key_left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
  key_right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -45,8 +64,18 @@ player = this.add.image(64, 64, "player-img");
 
 function actualiza ()
 {
-
-
+	if (key_left.isDown){
+		player.x -= player_speed;
+	}
+	else if(key_right.idDown){
+		player.x += player_speed;
+	}
+	if (key_up.isDown){
+		player.y -= player_speed;
+	}
+	else if (key_down.isDown){
+		player.y += player_speed;
+	}
 }
 
 </script>

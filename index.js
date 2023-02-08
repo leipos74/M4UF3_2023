@@ -44,9 +44,7 @@ function send_player (response)
 
 
 http.createServer(function(request, response){
-
-
-
+	console.log(request.url);
 	let url = request.url.split("/");
 
 	switch (url[1]){
